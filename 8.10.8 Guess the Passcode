@@ -1,0 +1,32 @@
+import random
+
+# This functions checks whether the given guess passcode is the correct passcode
+def is_correct(guess_code, correct_code):
+    return guess_code == correct_code
+
+# This function generates a random 4 digit passcode and returns it as a String
+def generate_random_passcode():
+    random_passcode = ""
+    for i in range(4):
+        random_digit = random.randint(0, 9)
+        random_passcode += str(random_digit)
+    return random_passcode
+
+secret_passcode = generate_random_passcode()
+
+# This function counts the number of the guesses
+def guess_every_possible_passcode(secret_passcode):
+    num_guesses = 0
+    
+    # loop from 0 to 9999 (inclusive)
+    for i in range(10000):
+        # format i as a 4‑digit string with leading zeros, e.g. 7 -> "0007"
+        guess_code = f"{i:04d}"
+        num_guesses += 1
+        
+        if is_correct(guess_code, secret_passcode):
+            print("Correctly guessed passcode:", guess_code)
+            print("It took", num_guesses, "guesses to find the correct passcode.")
+            break
+
+guess_every_possible_passcode(secret_passcode)
